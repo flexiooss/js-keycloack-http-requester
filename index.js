@@ -1,4 +1,3 @@
-import './import'
-
-export {KeyKcloackHttpRequester} from './src/js/KeyKcloackHttpRequester'
+export {KeyCloackExecutorWorker} from './src/js/KeyCloackExecutor'
+export {KeyCloackExecutorWorker} from './src/js/KeyCloackExecutorWorker'
 
