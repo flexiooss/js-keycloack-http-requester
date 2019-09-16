@@ -2,7 +2,7 @@
 
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 
-import {ExecutorRequesterInterface, ExecutorWorker, RequestExecutorWorker} from '@flexio-oss/xmlhttp-requester'
+import {ExecutorRequesterInterface, ExecutorWorker} from '@flexio-oss/xmlhttp-requester'
 
 /**
  * @implements {ExecutorRequesterInterface}
@@ -64,9 +64,10 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).error(() => {
-      this.__redirectClb()
-    })
+        })
+      .error(() => {
+        this.__redirectClb()
+      })
 
   }
 
