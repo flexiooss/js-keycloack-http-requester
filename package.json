@@ -1,7 +1,7 @@
 {
   "name": "@flexio-oss/js-keycloack-http-requester",
   "version": "1.0.0-dev",
-  "description": "Generic asynchronous Http requester with KeyCloack implementation",
+  "description": "Generic asynchronous Http requester with Keycloack implementation",
   "main": "index.js",
   "module": "index.js",
   "repository": "https://github.com/flexiooss/js-keycloack-http-requester.git",
