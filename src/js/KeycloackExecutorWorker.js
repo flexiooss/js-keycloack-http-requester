@@ -7,16 +7,16 @@ import {ExecutorRequesterInterface, ExecutorWorker} from '@flexio-oss/xmlhttp-re
 /**
  * @implements {ExecutorRequesterInterface}
  */
-export class KeyCloackExecutorWorker extends ExecutorWorker {
+export class KeycloackExecutorWorker extends ExecutorWorker {
   /**
    *
-   * @param {KeyCloack} keyCloack
+   * @param {Keycloack} keycloack
    * @param {number} minValidity
    * @param {function} redirectClb
    */
-  constructor(keyCloack, minValidity, redirectClb) {
+  constructor(keycloack, minValidity, redirectClb) {
     super()
-    this.__keyCloack = keyCloack
+    this.__keycloack = keycloack
     this.__minValidity = minValidity
     this.__redirectClb = redirectClb
   }
@@ -30,7 +30,7 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
   _setAuthToken(xmlhttpRequestDelegate) {
     return globalFlexioImport.io.flexio.xmlhttp_requester.types.XmlHttpRequestDelegateBuilder
       .from(xmlhttpRequestDelegate)
-      .header('Authorization', `Bearer ${this.__keyCloack}`)
+      .header('Authorization', `Bearer ${this.__keycloack}`)
       .build()
   }
 
@@ -40,7 +40,7 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
    */
   get(xmlhttpRequestDelegate, callback) {
 
-    this.__keyCloack
+    this.__keycloack
       .updateToken(this.__minValidity)
       .success(
         /**
@@ -80,7 +80,7 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
    */
   post(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
 
-    this.__keyCloack
+    this.__keycloack
       .updateToken(this.__minValidity)
       .success(
         /**
@@ -119,7 +119,7 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
    */
   put(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
 
-    this.__keyCloack
+    this.__keycloack
       .updateToken(this.__minValidity)
       .success(
         /**
@@ -158,7 +158,7 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
    */
   patch(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
 
-    this.__keyCloack
+    this.__keycloack
       .updateToken(this.__minValidity)
       .success(
         /**
@@ -195,7 +195,7 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
    */
   delete(xmlhttpRequestDelegate, callback) {
 
-    this.__keyCloack
+    this.__keycloack
       .updateToken(this.__minValidity)
       .success(
         /**
@@ -228,7 +228,7 @@ export class KeyCloackExecutorWorker extends ExecutorWorker {
    */
   head(xmlhttpRequestDelegate, callback) {
 
-    this.__keyCloack
+    this.__keycloack
       .updateToken(this.__minValidity)
       .success(
         /**

@@ -1,13 +1,13 @@
 # js-keycloack-http-requester
 
 ```javascript
-import {XmlHttpRequester, KeyCloackExecutor} from '@flexio-oss/js-keycloack-http-requester'
+import {XmlHttpRequester, KeycloackExecutor} from '@flexio-oss/js-keycloack-http-requester'
 
 const keycloak = Keycloak()
 
 new MyApiClient(
   new XmlHttpRequester(
-    new KeyCloackExecutor(
+    new KeycloackExecutor(
       keycloak,
       20,
       () => {

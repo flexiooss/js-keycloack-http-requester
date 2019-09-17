@@ -1,4 +1,4 @@
-export {KeyCloackExecutor} from './src/js/KeyCloackExecutor'
-export {KeyCloackExecutorWorker} from './src/js/KeyCloackExecutorWorker'
+export {KeycloackExecutor} from './src/js/KeycloackExecutor'
+export {KeycloackExecutorWorker} from './src/js/KeycloackExecutorWorker'
 export {XmlHttpRequester} from '@flexio-oss/xmlhttp-requester'
 
