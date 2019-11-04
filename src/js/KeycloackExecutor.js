@@ -28,7 +28,7 @@ export class KeycloackExecutor extends Executor {
   _setAuthToken(xmlhttpRequestDelegate) {
     return globalFlexioImport.io.flexio.xmlhttp_requester.types.XmlHttpRequestDelegateBuilder
       .from(xmlhttpRequestDelegate)
-      .header('Authorization', `Bearer ${this.__keycloack}`)
+      .header('Authorization', `Bearer ${this.__keycloack.token}`)
       .build()
   }
 
