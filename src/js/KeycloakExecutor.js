@@ -1,20 +1,20 @@
 /* global XMLHttpRequest */
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
-import {Executor, ExecutorRequesterInterface} from '@flexio-oss/xmlhttp-requester'
+import {Executor} from '@flexio-oss/xmlhttp-requester'
 
 /**
  * @implements {ExecutorRequesterInterface}
  */
-export class KeycloackExecutor extends Executor {
+export class KeycloakExecutor extends Executor {
   /**
    *
-   * @param {Keycloack} keycloack
+   * @param {Keycloack} keycloak
    * @param {number} minValidity
    * @param {function} redirectClb
    */
-  constructor(keycloack, minValidity, redirectClb) {
+  constructor(keycloak, minValidity, redirectClb) {
     super()
-    this.__keycloack = keycloack
+    this.__keycloak = keycloak
     this.__minValidity = minValidity
     this.__redirectClb = redirectClb
   }
@@ -28,7 +28,7 @@ export class KeycloackExecutor extends Executor {
   _setAuthToken(xmlhttpRequestDelegate) {
     return globalFlexioImport.io.flexio.xmlhttp_requester.types.XmlHttpRequestDelegateBuilder
       .from(xmlhttpRequestDelegate)
-      .header('Authorization', `Bearer ${this.__keycloack.token}`)
+      .header('Authorization', `Bearer ${this.__keycloak.token}`)
       .build()
   }
 
@@ -38,7 +38,7 @@ export class KeycloackExecutor extends Executor {
    */
   get(xmlhttpRequestDelegate, callback) {
 
-    this.__keycloack
+    this.__keycloak
       .updateToken(this.__minValidity)
       .then(
         /**
@@ -69,7 +69,7 @@ export class KeycloackExecutor extends Executor {
    */
   post(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
 
-    this.__keycloack
+    this.__keycloak
       .updateToken(this.__minValidity)
       .then(
         /**
@@ -104,7 +104,7 @@ export class KeycloackExecutor extends Executor {
    */
   put(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
 
-    this.__keycloack
+    this.__keycloak
       .updateToken(this.__minValidity)
       .then(
         /**
@@ -139,7 +139,7 @@ export class KeycloackExecutor extends Executor {
    */
   patch(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
 
-    this.__keycloack
+    this.__keycloak
       .updateToken(this.__minValidity)
       .then(
         /**
@@ -171,7 +171,7 @@ export class KeycloackExecutor extends Executor {
    * @param {ExecutorRequesterInterface~executionClb} callback
    */
   delete(xmlhttpRequestDelegate, callback) {
-    this.__keycloack
+    this.__keycloak
       .updateToken(this.__minValidity)
       .then(
         /**
@@ -200,7 +200,7 @@ export class KeycloackExecutor extends Executor {
    */
   head(xmlhttpRequestDelegate, callback) {
 
-    this.__keycloack
+    this.__keycloak
       .updateToken(this.__minValidity)
       .then(
         /**

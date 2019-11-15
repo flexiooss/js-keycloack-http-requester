@@ -15,7 +15,7 @@
     "code-altimeter-js": "https://github.com/flexiooss/code-altimeter-js.git"
   },
   "peerDependencies": {
-    "keycloak-js": ">0.0.0"
+    "keycloak-js": ">7.0.1"
   },
   "hotballoon-shed": {
     "build": {
