@@ -42,7 +42,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -65,7 +65,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
             callback
           )
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
 
@@ -82,7 +82,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -106,7 +106,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).error(() => {
+        }).catch(() => {
       this.__redirectClb()
     })
   }
@@ -121,7 +121,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -145,7 +145,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).error(() => {
+        }).catch(() => {
       this.__redirectClb()
     })
   }
@@ -160,7 +160,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -184,7 +184,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).error(() => {
+        }).catch(() => {
       this.__redirectClb()
     })
   }
@@ -197,7 +197,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -217,7 +217,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).error(() => {
+        }).catch(() => {
       this.__redirectClb()
     })
   }
@@ -230,7 +230,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -250,7 +250,7 @@ export class KeycloackExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).error(() => {
+        }).catch(() => {
       this.__redirectClb()
     })
   }
