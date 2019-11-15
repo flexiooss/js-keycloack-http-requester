@@ -2,7 +2,8 @@
 
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {ExecutorWorker} from '@flexio-oss/xmlhttp-requester'
-import * as Keycloak from 'keycloak-js'
+
+const minSecondValidity = 20
 
 /**
  * @implements {ExecutorRequesterInterface}
@@ -11,14 +12,24 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
   /**
    *
    * @param {Keycloack} keycloak
-   * @param {number} minValidity
    * @param {function} redirectClb
    */
-  constructor(keycloak, minValidity, redirectClb) {
+  constructor(keycloak, redirectClb) {
     super()
     this.__keycloak = keycloak
-    this.__minValidity = minValidity
     this.__redirectClb = redirectClb
+
+    this.__minValidity = minSecondValidity
+  }
+
+  __refreshToken() {
+    const expSecond = this.__keycloak.tokenParsed.exp
+    const nowSecond = Date.now() / 1000 | 0
+    const timeRemaining = expSecond - nowSecond
+    if (timeRemaining < this.__minValidity) {
+      return this.__keycloak.updateToken(this.__minValidity)
+    }
+    return Promise.resolve(false)
   }
 
   /**
@@ -39,9 +50,7 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    * @param {ExecutorRequesterInterface~executionClb} callback
    */
   get(xmlhttpRequestDelegate, callback) {
-
-    this.__keycloak
-      .updateToken(this.__minValidity)
+    this.__refreshToken()
       .then(
         /**
          *
@@ -79,9 +88,7 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    * @param {?string} [body=null]
    */
   post(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
-
-    this.__keycloak
-      .updateToken(this.__minValidity)
+    this.__refreshToken()
       .then(
         /**
          *
@@ -118,9 +125,7 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    * @param {?string} body
    */
   put(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
-
-    this.__keycloak
-      .updateToken(this.__minValidity)
+    this.__refreshToken()
       .then(
         /**
          *
@@ -157,9 +162,7 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    * @param {?string} body
    */
   patch(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
-
-    this.__keycloak
-      .updateToken(this.__minValidity)
+    this.__refreshToken()
       .then(
         /**
          *
@@ -194,9 +197,7 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    * @param {ExecutorRequesterInterface~executionClb} callback
    */
   delete(xmlhttpRequestDelegate, callback) {
-
-    this.__keycloak
-      .updateToken(this.__minValidity)
+    this.__refreshToken()
       .then(
         /**
          *
@@ -227,9 +228,7 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    * @param {ExecutorRequesterInterface~executionClb} callback
    */
   head(xmlhttpRequestDelegate, callback) {
-
-    this.__keycloak
-      .updateToken(this.__minValidity)
+    this.__refreshToken()
       .then(
         /**
          *
