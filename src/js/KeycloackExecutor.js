@@ -40,7 +40,7 @@ export class KeycloackExecutor extends Executor {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -56,7 +56,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -71,7 +71,7 @@ export class KeycloackExecutor extends Executor {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -91,7 +91,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -106,7 +106,7 @@ export class KeycloackExecutor extends Executor {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -126,7 +126,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -141,7 +141,7 @@ export class KeycloackExecutor extends Executor {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -161,7 +161,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -173,7 +173,7 @@ export class KeycloackExecutor extends Executor {
   delete(xmlhttpRequestDelegate, callback) {
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -189,7 +189,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -202,7 +202,7 @@ export class KeycloackExecutor extends Executor {
 
     this.__keycloack
       .updateToken(this.__minValidity)
-      .success(
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -218,9 +218,8 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
-
 }
