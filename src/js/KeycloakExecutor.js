@@ -22,10 +22,7 @@ export class KeycloakExecutor extends Executor {
   }
 
   __refreshToken() {
-    const expSecond = this.__keycloak.tokenParsed.exp
-    const nowSecond = Date.now() / 1000 | 0
-    const timeRemaining = expSecond - nowSecond
-    if (timeRemaining < this.__minValidity) {
+    if (this.__keycloak.isTokenExpired(this.__minValidity)) {
       return this.__keycloak.updateToken(this.__minValidity)
     }
     return Promise.resolve(false)
