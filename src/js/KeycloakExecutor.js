@@ -1,22 +1,31 @@
 /* global XMLHttpRequest */
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
-import {Executor, ExecutorRequesterInterface} from '@flexio-oss/xmlhttp-requester'
+import {Executor} from '@flexio-oss/xmlhttp-requester'
+
+const minSecondValidity = 20
 
 /**
  * @implements {ExecutorRequesterInterface}
  */
-export class KeycloackExecutor extends Executor {
+export class KeycloakExecutor extends Executor {
   /**
    *
-   * @param {Keycloack} keycloack
-   * @param {number} minValidity
+   * @param {Keycloack} keycloak
    * @param {function} redirectClb
    */
-  constructor(keycloack, minValidity, redirectClb) {
+  constructor(keycloak, redirectClb) {
     super()
-    this.__keycloack = keycloack
-    this.__minValidity = minValidity
+    this.__keycloak = keycloak
     this.__redirectClb = redirectClb
+
+    this.__minValidity = minSecondValidity
+  }
+
+  __refreshToken() {
+    if (this.__keycloak.isTokenExpired(this.__minValidity)) {
+      return this.__keycloak.updateToken(this.__minValidity)
+    }
+    return Promise.resolve(false)
   }
 
   /**
@@ -28,7 +37,7 @@ export class KeycloackExecutor extends Executor {
   _setAuthToken(xmlhttpRequestDelegate) {
     return globalFlexioImport.io.flexio.xmlhttp_requester.types.XmlHttpRequestDelegateBuilder
       .from(xmlhttpRequestDelegate)
-      .header('Authorization', `Bearer ${this.__keycloack}`)
+      .header('Authorization', `Bearer ${this.__keycloak.token}`)
       .build()
   }
 
@@ -37,10 +46,8 @@ export class KeycloackExecutor extends Executor {
    * @param {ExecutorRequesterInterface~executionClb} callback
    */
   get(xmlhttpRequestDelegate, callback) {
-
-    this.__keycloack
-      .updateToken(this.__minValidity)
-      .success(
+    this.__refreshToken()
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -56,7 +63,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -68,10 +75,8 @@ export class KeycloackExecutor extends Executor {
    * @param {?string} [body=null]
    */
   post(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
-
-    this.__keycloack
-      .updateToken(this.__minValidity)
-      .success(
+    this.__refreshToken()
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -91,7 +96,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -103,10 +108,8 @@ export class KeycloackExecutor extends Executor {
    * @param {?string} body
    */
   put(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
-
-    this.__keycloack
-      .updateToken(this.__minValidity)
-      .success(
+    this.__refreshToken()
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -126,7 +129,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -138,10 +141,8 @@ export class KeycloackExecutor extends Executor {
    * @param {?string} body
    */
   patch(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
-
-    this.__keycloack
-      .updateToken(this.__minValidity)
-      .success(
+    this.__refreshToken()
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -161,7 +162,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -171,9 +172,8 @@ export class KeycloackExecutor extends Executor {
    * @param {ExecutorRequesterInterface~executionClb} callback
    */
   delete(xmlhttpRequestDelegate, callback) {
-    this.__keycloack
-      .updateToken(this.__minValidity)
-      .success(
+    this.__refreshToken()
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -189,7 +189,7 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
@@ -199,10 +199,8 @@ export class KeycloackExecutor extends Executor {
    * @param {ExecutorRequesterInterface~executionClb} callback
    */
   head(xmlhttpRequestDelegate, callback) {
-
-    this.__keycloack
-      .updateToken(this.__minValidity)
-      .success(
+    this.__refreshToken()
+      .then(
         /**
          *
          * @param {boolean} refreshed
@@ -218,9 +216,8 @@ export class KeycloackExecutor extends Executor {
             ))
 
         })
-      .error(() => {
+      .catch(() => {
         this.__redirectClb()
       })
   }
-
 }

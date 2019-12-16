@@ -14,6 +14,9 @@
   "devDependencies": {
     "code-altimeter-js": "https://github.com/flexiooss/code-altimeter-js.git"
   },
+  "peerDependencies": {
+    "keycloak-js": "8.0.0"
+  },
   "hotballoon-shed": {
     "build": {
       "builder": "webpack4"
