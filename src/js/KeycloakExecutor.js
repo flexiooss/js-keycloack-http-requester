@@ -2,7 +2,9 @@
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {Executor} from '@flexio-oss/xmlhttp-requester'
 
+
 const minSecondValidity = 20
+
 
 /**
  * @implements {ExecutorRequesterInterface}
@@ -10,8 +12,8 @@ const minSecondValidity = 20
 export class KeycloakExecutor extends Executor {
   /**
    *
-   * @param {Keycloack} keycloak
-   * @param {function} redirectClb
+   * @param {Keycloak} keycloak
+   * @param {function(e: Error):void} redirectClb
    */
   constructor(keycloak, redirectClb) {
     super()
@@ -47,6 +49,9 @@ export class KeycloakExecutor extends Executor {
    */
   get(xmlhttpRequestDelegate, callback) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -63,9 +68,6 @@ export class KeycloakExecutor extends Executor {
             ))
 
         })
-      .catch(() => {
-        this.__redirectClb()
-      })
   }
 
   /**
@@ -76,6 +78,9 @@ export class KeycloakExecutor extends Executor {
    */
   post(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -96,9 +101,7 @@ export class KeycloakExecutor extends Executor {
             ))
 
         })
-      .catch(() => {
-        this.__redirectClb()
-      })
+
   }
 
   /**
@@ -109,6 +112,9 @@ export class KeycloakExecutor extends Executor {
    */
   put(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -129,9 +135,7 @@ export class KeycloakExecutor extends Executor {
             ))
 
         })
-      .catch(() => {
-        this.__redirectClb()
-      })
+
   }
 
   /**
@@ -142,6 +146,9 @@ export class KeycloakExecutor extends Executor {
    */
   patch(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -162,9 +169,7 @@ export class KeycloakExecutor extends Executor {
             ))
 
         })
-      .catch(() => {
-        this.__redirectClb()
-      })
+
   }
 
   /**
@@ -173,6 +178,9 @@ export class KeycloakExecutor extends Executor {
    */
   delete(xmlhttpRequestDelegate, callback) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -189,9 +197,7 @@ export class KeycloakExecutor extends Executor {
             ))
 
         })
-      .catch(() => {
-        this.__redirectClb()
-      })
+
   }
 
   /**
@@ -200,6 +206,9 @@ export class KeycloakExecutor extends Executor {
    */
   head(xmlhttpRequestDelegate, callback) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -216,8 +225,6 @@ export class KeycloakExecutor extends Executor {
             ))
 
         })
-      .catch(() => {
-        this.__redirectClb()
-      })
+
   }
 }

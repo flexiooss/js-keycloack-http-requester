@@ -3,7 +3,9 @@
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {ExecutorWorker} from '@flexio-oss/xmlhttp-requester'
 
+
 const minSecondValidity = 20
+
 
 /**
  * @implements {ExecutorRequesterInterface}
@@ -11,8 +13,8 @@ const minSecondValidity = 20
 export class KeycloakExecutorWorker extends ExecutorWorker {
   /**
    *
-   * @param {Keycloack} keycloak
-   * @param {function} redirectClb
+   * @param {Keycloak} keycloak
+   * @param {function(e: Error):void} redirectClb
    */
   constructor(keycloak, redirectClb) {
     super()
@@ -51,6 +53,9 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    */
   get(xmlhttpRequestDelegate, callback) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -74,9 +79,6 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
             callback
           )
         })
-      .catch(() => {
-        this.__redirectClb()
-      })
 
   }
 
@@ -89,6 +91,9 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    */
   post(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -113,9 +118,8 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).catch(() => {
-      this.__redirectClb()
-    })
+        })
+
   }
 
   /**
@@ -126,6 +130,9 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    */
   put(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -150,9 +157,8 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).catch(() => {
-      this.__redirectClb()
-    })
+        })
+
   }
 
   /**
@@ -163,6 +169,9 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    */
   patch(xmlhttpRequestDelegate, callback, contentType = null, body = null) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -187,9 +196,8 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).catch(() => {
-      this.__redirectClb()
-    })
+        })
+
   }
 
   /**
@@ -198,6 +206,9 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    */
   delete(xmlhttpRequestDelegate, callback) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -218,9 +229,8 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).catch(() => {
-      this.__redirectClb()
-    })
+        })
+
   }
 
   /**
@@ -229,6 +239,9 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
    */
   head(xmlhttpRequestDelegate, callback) {
     this.__refreshToken()
+      .catch((e) => {
+        this.__redirectClb(e)
+      })
       .then(
         /**
          *
@@ -249,8 +262,6 @@ export class KeycloakExecutorWorker extends ExecutorWorker {
             ),
             callback
           )
-        }).catch(() => {
-      this.__redirectClb()
-    })
+        })
   }
 }
