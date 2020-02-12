@@ -59,13 +59,14 @@ export class KeycloakExecutor extends Executor {
          */
         (refreshed) => {
 
-          callback(
-            this.exec(
-              this._checkRequestType(
-                this._setAuthToken(xmlhttpRequestDelegate)
-              ),
-              'GET'
-            ))
+          this.exec(
+            this._checkRequestType(
+              this._setAuthToken(xmlhttpRequestDelegate)
+            ),
+            'GET',
+            null,
+            callback
+          )
 
         })
   }
@@ -88,17 +89,17 @@ export class KeycloakExecutor extends Executor {
          */
         (refreshed) => {
 
-          callback(
-            this.exec(
-              this._checkRequestType(
-                this._ensureContentType(
-                  this._setAuthToken(xmlhttpRequestDelegate),
-                  contentType
-                )
-              ),
-              'POST',
-              body
-            ))
+          this.exec(
+            this._checkRequestType(
+              this._ensureContentType(
+                this._setAuthToken(xmlhttpRequestDelegate),
+                contentType
+              )
+            ),
+            'POST',
+            body,
+            callback
+          )
 
         })
 
@@ -122,17 +123,17 @@ export class KeycloakExecutor extends Executor {
          */
         (refreshed) => {
 
-          callback(
-            this.exec(
-              this._checkRequestType(
-                this._ensureContentType(
-                  this._setAuthToken(xmlhttpRequestDelegate),
-                  contentType
-                )
-              ),
-              'PUT',
-              body
-            ))
+          this.exec(
+            this._checkRequestType(
+              this._ensureContentType(
+                this._setAuthToken(xmlhttpRequestDelegate),
+                contentType
+              )
+            ),
+            'PUT',
+            body,
+            callback
+          )
 
         })
 
@@ -156,17 +157,17 @@ export class KeycloakExecutor extends Executor {
          */
         (refreshed) => {
 
-          callback(
-            this.exec(
-              this._checkRequestType(
-                this._ensureContentType(
-                  this._setAuthToken(xmlhttpRequestDelegate),
-                  contentType
-                )
-              ),
-              'PATCH',
-              body
-            ))
+          this.exec(
+            this._checkRequestType(
+              this._ensureContentType(
+                this._setAuthToken(xmlhttpRequestDelegate),
+                contentType
+              )
+            ),
+            'PATCH',
+            body,
+            callback
+          )
 
         })
 
@@ -188,15 +189,17 @@ export class KeycloakExecutor extends Executor {
          */
         (refreshed) => {
 
-          callback(
-            this.exec(
-              this._checkRequestType(
-                this._setAuthToken(xmlhttpRequestDelegate)
-              ),
-              'DELETE'
-            ))
+          this.exec(
+            this._checkRequestType(
+              this._setAuthToken(xmlhttpRequestDelegate)
+            ),
+            'DELETE',
+            null,
+            callback
+          )
 
-        })
+        }
+      )
 
   }
 
@@ -216,15 +219,15 @@ export class KeycloakExecutor extends Executor {
          */
         (refreshed) => {
 
-          callback(
-            this.exec(
-              this._checkRequestType(
-                this._setAuthToken(xmlhttpRequestDelegate)
-              ),
-              'HEAD'
-            ))
-
-        })
-
+          this.exec(
+            this._checkRequestType(
+              this._setAuthToken(xmlhttpRequestDelegate)
+            ),
+            'HEAD',
+            null,
+            callback
+          )
+        }
+      )
   }
 }
